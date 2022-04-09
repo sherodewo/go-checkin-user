@@ -58,7 +58,7 @@ func (r userRepository) FindById(id string) (models.User, error) {
 
 func (r userRepository) FindWhere(email string) (models.User, error) {
 	var entity models.User
-	err := r.DB.Where("email = ?", email).Find(&entity).Error
+	err := r.DB.Where("email = ? AND type_user = ?", email, 1).Find(&entity).Error
 	return entity, err
 }
 
