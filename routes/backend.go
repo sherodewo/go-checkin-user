@@ -178,4 +178,12 @@ func BackendRoute(e *echo.Echo, db *gorm.DB) {
 	configGroup.POST("/delete/:id", configController.Delete)
 	bGroup.POST("/admin/config/set-active/:id", configController.SetActive)
 	bGroup.POST("/admin/config/set-inactive/:id", configController.SetInactive)
+
+	attendanceController := config.InjectAttendanceController(db)
+	attendanceGroup := backendGroup.Group("/attend")
+	attendanceGroup.GET("/photo", attendanceController.PhotoIndex)
+	attendanceGroup.GET("/checkin", attendanceController.CheckIndex)
+	attendanceGroup.POST("/check-photo", attendanceController.PhotoCheck)
+	attendanceGroup.POST("/checkin", attendanceController.Checkin)
+
 }

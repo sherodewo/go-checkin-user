@@ -13,6 +13,9 @@ github.com/go-playground/locales/currency
 # github.com/go-playground/universal-translator v0.18.0
 ## explicit; go 1.13
 github.com/go-playground/universal-translator
+# github.com/go-resty/resty/v2 v2.7.0
+## explicit; go 1.11
+github.com/go-resty/resty/v2
 # github.com/go-sql-driver/mysql v1.6.0
 ## explicit; go 1.10
 github.com/go-sql-driver/mysql
@@ -83,13 +86,14 @@ golang.org/x/crypto/acme
 golang.org/x/crypto/acme/autocert
 golang.org/x/crypto/bcrypt
 golang.org/x/crypto/blowfish
-# golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f
+# golang.org/x/net v0.0.0-20211029224645-99673261e6eb
 ## explicit; go 1.17
 golang.org/x/net/http/httpguts
 golang.org/x/net/http2
 golang.org/x/net/http2/h2c
 golang.org/x/net/http2/hpack
 golang.org/x/net/idna
+golang.org/x/net/publicsuffix
 # golang.org/x/sys v0.0.0-20211103235746-7861aae1554b
 ## explicit; go 1.17
 golang.org/x/sys/internal/unsafeheader

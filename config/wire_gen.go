@@ -42,3 +42,10 @@ func InjectConfigController(db *gorm.DB) controllers.ConfigController {
 	return controller
 }
 
+func InjectAttendanceController(db *gorm.DB) controllers.AttendanceController {
+	repository := repository.NewAttendanceRepository(db)
+	service := service.NewAttendanceService(repository)
+	controller := controllers.NewAttendanceController(service)
+	return controller
+}
+
