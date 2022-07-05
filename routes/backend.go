@@ -93,7 +93,7 @@ func BackendRoute(e *echo.Echo, db *gorm.DB) {
 
 				var listParentMenu []models.Menu
 				if err := db.Raw("select * from web_menu where is_active = ? and menu_type = ? ",
-					1, "parent_menu").Scan(&listParentMenu).Error; err != nil {
+					2, "parent_menu").Scan(&listParentMenu).Error; err != nil {
 				}
 
 				for _, v := range listParentMenu {
@@ -123,7 +123,7 @@ func BackendRoute(e *echo.Echo, db *gorm.DB) {
 
 				var menus []models.Menu
 				if err := db.Raw("select * from web_menu where parent_id = ? and is_active = ? and menu_type = ? ",
-					0, 1, "menu").Scan(&menus).Error; err != nil {
+					0, 2, "menu").Scan(&menus).Error; err != nil {
 					log.Info("ERROR GET MENU BY ROLE ", err.Error())
 				}
 				dataMenu = map[string]interface{}{
