@@ -12,7 +12,7 @@
                 </div>
 
                 <!--begin::Form-->
-                <form class="kt-form" method="POST" action="/check/admin/menus/update/{{.data.ID}}">
+                <form class="kt-form" method="POST" action="/check/menus/update/{{.data.ID}}">
 
                     <div class="kt-portlet__body">
                         {{if .flashMessage}}
@@ -82,7 +82,7 @@
                             <button type="submit" class="btn btn-primary btn-brand btn-pill btn-elevate"
                                     id="kt_submit_update">Submit
                             </button>
-                            <a href="/check/admin/menus/list" class="btn btn-secondary">Cancel</a>
+                            <a href="/check/menus/list" class="btn btn-secondary">Cancel</a>
                         </div>
                     </div>
                 </form>
@@ -112,7 +112,7 @@
             allowClear: true,
             multiple: true,
             ajax: {
-                url: '/check/admin/roles/select2',
+                url: '/check/roles/select2',
                 datatype: 'json',
                 delay: 250,
                 processResults: function (data) {

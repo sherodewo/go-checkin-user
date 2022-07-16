@@ -12,7 +12,7 @@
                 </div>
 
                 <!--begin::Form-->
-                <form class="kt-form" method="POST" action="/check/admin/permissions/update/{{.data.ID}}">
+                <form class="kt-form" method="POST" action="/check/permissions/update/{{.data.ID}}">
 
                     <div class="kt-portlet__body">
                         {{if .flashMessage}}
@@ -50,7 +50,7 @@
                             <button type="submit" class="btn btn-primary btn-brand btn-pill btn-elevate"
                                     id="kt_submit_update">Submit
                             </button>
-                            <a href="/check/admin/permissions/list" class="btn btn-secondary">Cancel</a>
+                            <a href="/check/permissions/list" class="btn btn-secondary">Cancel</a>
                         </div>
                     </div>
                 </form>

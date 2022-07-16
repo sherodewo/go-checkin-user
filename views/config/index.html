@@ -97,7 +97,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="kt-form" role="form" id="form_add" method="POST" action="/los-cms/admin/config/store">
+                    <form class="kt-form" role="form" id="form_add" method="POST" action="/los-cms/config/store">
 
                         <div class="form-group">
                             <div class="row">
@@ -155,7 +155,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="kt-form" role="form" id="form" method="POST" action="/los-cms/admin/config/update">
+                    <form class="kt-form" role="form" id="form" method="POST" action="/los-cms/config/update">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-3">
@@ -232,7 +232,7 @@
 
         function Edit(id){
             $.ajax({
-                url:"/check/admin/config/"+id,
+                url:"/check/config/"+id,
                 type:"GET",
                 beforeSend:function (res){
                 },
@@ -288,7 +288,7 @@
                 csrf: $('#token_edit').val()
             }
             $.ajax({
-                url:"/check/admin/config/update/"+id,
+                url:"/check/config/update/"+id,
                 data : data,
                 type:"POST",
                 beforeSend:function (res){
@@ -325,7 +325,7 @@
             }
 
             $.ajax({
-                url:"/check/admin/config/store",
+                url:"/check/config/store",
                 type:"POST",
                 data:data,
                 beforeSend: function() {
@@ -362,7 +362,7 @@
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ],
-            ajax: '/check/admin/config/datatable',
+            ajax: '/check/config/datatable',
             columns: [
                 // {data: 'experian_id', name: 'experian_id'},
                 {data: 'group_name', name: 'ProspectID'},
@@ -382,7 +382,7 @@
                 if ($(this).is(':checked')) {
                     //SET ACTIVE
                     $.ajax({
-                        url: "/check/admin/config/set-active/"+id,
+                        url: "/check/config/set-active/"+id,
                         type: 'POST',
                         success: function (res) {
                             Swal.fire(
@@ -404,7 +404,7 @@
                 else {
                     //SET INACTIVE
                     $.ajax({
-                        url: "/check/admin/config/set-inactive/"+id,
+                        url: "/check/config/set-inactive/"+id,
                         type: 'POST',
                         success: function (res) {
                             Swal.fire(
@@ -439,7 +439,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.value) {
-                    url = '/check/admin/config/delete/' + id
+                    url = '/check/config/delete/' + id
                     $.ajax({
                         url: url,
                         type: 'POST',

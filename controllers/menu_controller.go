@@ -23,7 +23,7 @@ func NewMenuController(service *service.MenuService) MenuController {
 			BreadCrumbs: []map[string]interface{}{
 				0: {
 					"menu": "Menu",
-					"link": "/check/admin/menus",
+					"link": "/check/menus",
 				},
 			},
 		},
@@ -34,7 +34,7 @@ func NewMenuController(service *service.MenuService) MenuController {
 func (c *MenuController) Index(ctx echo.Context) error {
 	breadCrumbs := map[string]interface{}{
 		"menu": "List Menu",
-		"link": "/check/admin/menus/list",
+		"link": "/check/menus/list",
 	}
 	return Render(ctx, "List Menu", "menu/index", c.Menu, session.GetFlashMessage(ctx),
 		append(c.BreadCrumbs, breadCrumbs), nil)
@@ -43,7 +43,7 @@ func (c *MenuController) Index(ctx echo.Context) error {
 func (c *MenuController) Add(ctx echo.Context) error {
 	breadCrumbs := map[string]interface{}{
 		"menu": "Add",
-		"link": "/check/admin/menus/add",
+		"link": "/check/menus/add",
 	}
 	return Render(ctx, "Add Menu", "menu/add", c.Menu, session.GetFlashMessage(ctx),
 		append(c.BreadCrumbs, breadCrumbs), nil)
@@ -66,9 +66,9 @@ func (c *MenuController) Datatable(ctx echo.Context) error {
 	var action string
 	listOfData := make([]map[string]interface{}, len(data))
 	for k, v := range data {
-		//action = `<a href="/check/admin/menus/submenu/` + v.ID + `/list" data-toggle="tooltip" data-placement="right" title="Add sub menu"><i class="la la-plus"></i></a>`
-		//action += `<a href="/check/admin/menus/detail/` + v.ID + `" data-toggle="tooltip" data-placement="right" title="Detail"><i class="fa fa-user"></i> </a>`
-		//action += `<a href="/check/admin/menus/edit/` + v.ID + `" data-toggle="tooltip" data-placement="right" title="Edit"><i class="fa fa-edit"></i> </a>`
+		//action = `<a href="/check/menus/submenu/` + v.ID + `/list" data-toggle="tooltip" data-placement="right" title="Add sub menu"><i class="la la-plus"></i></a>`
+		//action += `<a href="/check/menus/detail/` + v.ID + `" data-toggle="tooltip" data-placement="right" title="Detail"><i class="fa fa-user"></i> </a>`
+		//action += `<a href="/check/menus/edit/` + v.ID + `" data-toggle="tooltip" data-placement="right" title="Edit"><i class="fa fa-edit"></i> </a>`
 		//action += `<a href="JavaScript:void(0);" onclick="SetActive('` + v.ID + `')" data-toggle="tooltip" data-placement="right" title="Set Active"><i class="fa fa-lock-open"></i></a>`
 		//action += `<a href="JavaScript:void(0);" onclick="SetInactive('` + v.ID + `')" data-toggle="tooltip" data-placement="right" title="Set Inactive"><i class="fa fa-lock" style="color: #ff4d65"></i></a>`
 		//action += `<a href="JavaScript:void(0);" onclick="Delete('` + v.ID + `')" data-toggle="tooltip" data-placement="right" title="Delete"><i class="fa fa-trash" style="color: #ff4d65"></i></a>`
@@ -101,19 +101,19 @@ func (c *MenuController) Store(ctx echo.Context) error {
 	var menuDto dto.MenuDto
 	if err := ctx.Bind(&menuDto); err != nil {
 		session.SetFlashMessage(ctx, "error binding data", "error", nil)
-		return ctx.Redirect(302, "/check/admin/menus/list")
+		return ctx.Redirect(302, "/check/menus/list")
 	}
 	if err := ctx.Validate(&menuDto); err != nil {
 		session.SetFlashMessage(ctx, "Validation Error", "error", nil)
-		return ctx.Redirect(302, "/check/admin/menus/add")
+		return ctx.Redirect(302, "/check/menus/add")
 	}
 	result, err := c.service.StoreMenu(menuDto)
 	if err != nil {
 		session.SetFlashMessage(ctx, err.Error(), "error", nil)
-		return ctx.Redirect(302, "/check/admin/menus/list")
+		return ctx.Redirect(302, "/check/menus/list")
 	}
 	session.SetFlashMessage(ctx, "store data success", "success", result)
-	return ctx.Redirect(302, "/check/admin/menus/list")
+	return ctx.Redirect(302, "/check/menus/list")
 }
 
 func (c *MenuController) Detail(ctx echo.Context) error {
@@ -122,14 +122,14 @@ func (c *MenuController) Detail(ctx echo.Context) error {
 	if err != nil {
 		if gorm.IsRecordNotFoundError(err) {
 			session.SetFlashMessage(ctx, err.Error(), "error", nil)
-			return ctx.Redirect(302, "/check/admin/menus/list")
+			return ctx.Redirect(302, "/check/menus/list")
 		}
 		session.SetFlashMessage(ctx, err.Error(), "error", nil)
-		return ctx.Redirect(302, "/check/admin/menus/list")
+		return ctx.Redirect(302, "/check/menus/list")
 	}
 	breadCrumbs := map[string]interface{}{
 		"menu": "Detail",
-		"link": "/check/admin/menus/detail",
+		"link": "/check/menus/detail",
 	}
 	return Render(ctx, "Detail Menu", "menu/detail", c.Menu, session.FlashMessage{},
 		append(c.BreadCrumbs, breadCrumbs), data)
@@ -150,14 +150,14 @@ func (c *MenuController) Edit(ctx echo.Context) error {
 	if err != nil {
 		if gorm.IsRecordNotFoundError(err) {
 			session.SetFlashMessage(ctx, err.Error(), "error", nil)
-			return ctx.Redirect(302, "/check/admin/menus/list")
+			return ctx.Redirect(302, "/check/menus/list")
 		}
 		session.SetFlashMessage(ctx, err.Error(), "error", nil)
-		return ctx.Redirect(302, "/check/admin/menus/list")
+		return ctx.Redirect(302, "/check/menus/list")
 	}
 	breadCrumbs := map[string]interface{}{
 		"menu": "Edit",
-		"link": "/check/admin/menus/edit",
+		"link": "/check/menus/edit",
 	}
 	return Render(ctx, "Edit Role", "menu/edit", c.Menu, session.GetFlashMessage(ctx),
 		append(c.BreadCrumbs, breadCrumbs), data)
@@ -168,21 +168,21 @@ func (c *MenuController) Update(ctx echo.Context) error {
 	var menuUpdateDto dto.MenuUpdateDto
 	if err := ctx.Bind(&menuUpdateDto); err != nil {
 		session.SetFlashMessage(ctx, "error binding data", "error", nil)
-		return ctx.Redirect(302, "/check/admin/menus/list")
+		return ctx.Redirect(302, "/check/menus/list")
 	}
 
 	if err := ctx.Validate(&menuUpdateDto); err != nil {
 		session.SetFlashMessage(ctx, "Validation Error", "error", nil)
-		return ctx.Redirect(302, "/check/admin/menus/edit/"+id)
+		return ctx.Redirect(302, "/check/menus/edit/"+id)
 	}
 
 	result, err := c.service.UpdateMenu(id, menuUpdateDto)
 	if err != nil {
 		session.SetFlashMessage(ctx, err.Error(), "error", nil)
-		return ctx.Redirect(302, "/check/admin/menus/list")
+		return ctx.Redirect(302, "/check/menus/list")
 	}
 	session.SetFlashMessage(ctx, "update data success", "success", result)
-	return ctx.Redirect(302, "/check/admin/menus/list")
+	return ctx.Redirect(302, "/check/menus/list")
 }
 
 func (c *MenuController) SetActive(ctx echo.Context) error {

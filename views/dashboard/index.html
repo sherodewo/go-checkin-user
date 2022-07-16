@@ -73,7 +73,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <a href="/check/admin/register/add" class="btn btn-brand btn-elevate btn-icon-sm">
+                        <a href="/check/register/add" class="btn btn-brand btn-elevate btn-icon-sm">
                             <i class="la la-plus"></i>
                             New Record
                         </a>
@@ -104,7 +104,7 @@
                 "header": false,
                 "footer": false
             },
-            ajax: '/check/admin/dashboard/datatable',
+            ajax: '/check/dashboard/datatable',
             columns: [
                 {
                     data: 'id',
@@ -139,7 +139,7 @@
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                        url: '/check/admin/register/delete/' + id,
+                        url: '/check/register/delete/' + id,
                         type: 'DELETE',
                         data: data,
                         processData: false,

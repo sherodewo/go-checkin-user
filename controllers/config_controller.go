@@ -23,7 +23,7 @@ func NewConfigController(service *service.ConfigService) ConfigController {
 			BreadCrumbs: []map[string]interface{}{
 				0: {
 					"menu": "Menu",
-					"link": "/check/admin/config",
+					"link": "/check/config",
 				},
 			},
 		},
@@ -34,7 +34,7 @@ func NewConfigController(service *service.ConfigService) ConfigController {
 func (c *ConfigController) Index(ctx echo.Context) error {
 	breadCrumbs := map[string]interface{}{
 		"menu": "List Configuration",
-		"link": "/check/admin/config/list",
+		"link": "/check/config/list",
 	}
 	return Render(ctx, "List Config", "config/index", c.Menu, session.GetFlashMessage(ctx),
 		append(c.BreadCrumbs, breadCrumbs), nil)
@@ -123,20 +123,20 @@ func (c *ConfigController) Store(ctx echo.Context) error {
 	var menuDto dto.AppConfDto
 	if err := ctx.Bind(&menuDto); err != nil {
 		session.SetFlashMessage(ctx, "error binding data", "error", nil)
-		return ctx.Redirect(302, "/check/admin/config")
+		return ctx.Redirect(302, "/check/config")
 	}
 	menuDto.IsActive = 1
 	if err := ctx.Validate(&menuDto); err != nil {
 		session.SetFlashMessage(ctx, "Validation Error", "error", nil)
-		return ctx.Redirect(302, "/check/admin/config")
+		return ctx.Redirect(302, "/check/config")
 	}
 	result, err := c.service.StoreMenu(menuDto)
 	if err != nil {
 		session.SetFlashMessage(ctx, err.Error(), "error", nil)
-		return ctx.Redirect(302, "/check/admin/config")
+		return ctx.Redirect(302, "/check/config")
 	}
 	session.SetFlashMessage(ctx, "store data success", "success", result)
-	return ctx.Redirect(302, "/check/admin/config/list")
+	return ctx.Redirect(302, "/check/config/list")
 }
 
 func (c *ConfigController) Detail(ctx echo.Context) error {
@@ -145,10 +145,10 @@ func (c *ConfigController) Detail(ctx echo.Context) error {
 	if err != nil {
 		if gorm.IsRecordNotFoundError(err) {
 			session.SetFlashMessage(ctx, err.Error(), "error", nil)
-			return ctx.Redirect(302, "/check/admin/config")
+			return ctx.Redirect(302, "/check/config")
 		}
 		session.SetFlashMessage(ctx, err.Error(), "error", nil)
-		return ctx.Redirect(302, "/check/admin/config")
+		return ctx.Redirect(302, "/check/config")
 	}
 
 	return ctx.JSON(http.StatusOK, data)
@@ -168,21 +168,21 @@ func (c *ConfigController) Update(ctx echo.Context) error {
 	var req dto.AppConfDto
 	if err := ctx.Bind(&req); err != nil {
 		session.SetFlashMessage(ctx, "error binding data", "error", nil)
-		return ctx.Redirect(302, "/check/admin/config/list")
+		return ctx.Redirect(302, "/check/config/list")
 	}
 
 	if err := ctx.Validate(&req); err != nil {
 		session.SetFlashMessage(ctx, "Validation Error", "error", nil)
-		return ctx.Redirect(302, "/check/admin/config/edit/"+id)
+		return ctx.Redirect(302, "/check/config/edit/"+id)
 	}
 
 	result, err := c.service.UpdateConfig(id, req)
 	if err != nil {
 		session.SetFlashMessage(ctx, err.Error(), "error", nil)
-		return ctx.Redirect(302, "/check/admin/config/list")
+		return ctx.Redirect(302, "/check/config/list")
 	}
 	session.SetFlashMessage(ctx, "update data success", "success", result)
-	return ctx.Redirect(302, "/check/admin/config/list")
+	return ctx.Redirect(302, "/check/config/list")
 }
 
 func (c *ConfigController) SetActive(ctx echo.Context) error {

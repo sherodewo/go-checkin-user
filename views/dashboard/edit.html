@@ -12,7 +12,7 @@
                 </div>
 
                 <!--begin::Form-->
-                <form class="kt-form" method="POST" action="/check/admin/users/update/{{.data.UserID}}" enctype="multipart/form-data">
+                <form class="kt-form" method="POST" action="/check/users/update/{{.data.UserID}}" enctype="multipart/form-data">
 
                     <div class="kt-portlet__body">
                         {{if .flashMessage}}
@@ -103,7 +103,7 @@
                             <button type="submit" class="btn btn-primary btn-brand btn-pill btn-elevate"
                                     id="kt_submit_update">Submit
                             </button>
-                            <a href="/check/admin/users/list" class="btn btn-secondary">Cancel</a>
+                            <a href="/check/users/list" class="btn btn-secondary">Cancel</a>
                         </div>
                     </div>
                 </form>
@@ -177,7 +177,7 @@
             });
             form.ajaxSubmit({
                 type: 'POST',
-                url: '/check/admin/users/update/{{.data.UserID}}',
+                url: '/check/users/update/{{.data.UserID}}',
                 beforeSend: function (req) {
                 },
                 success: function (response, status, xhr, $form) {
@@ -189,7 +189,7 @@
                         icon: 'success',
                         text: "Data berhasil di update",
                     });
-                    window.location.href = "/check/admin/users/list";
+                    window.location.href = "/check/users/list";
                 },
                 error: function (response, status, xhr, $form) {
                     console.log(response);
@@ -210,7 +210,7 @@
         //     allowClear: true,
         //     multiple: false,
         //     ajax: {
-        //         url: '/check/admin/roles/select2',
+        //         url: '/check/roles/select2',
         //         datatype: 'json',
         //         delay: 250,
         //         processResults: function (data) {

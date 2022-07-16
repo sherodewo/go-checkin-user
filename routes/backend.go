@@ -138,8 +138,7 @@ func BackendRoute(e *echo.Echo, db *gorm.DB) {
 
 	// You should use helper func `Middleware()` to set the supplied
 	// TemplateEngine and make `HTML()` work validly.
-	bGroup := e.Group("/check")
-	backendGroup := bGroup.Group("/admin", mv, middleware.SessionMiddleware(session.Manager))
+	backendGroup := e.Group("/check", mv, middleware.SessionMiddleware(session.Manager))
 	authorizationMiddleware := middleware.NewAuthorizationMiddleware(db)
 
 	var menus []models.Menu
@@ -176,8 +175,8 @@ func BackendRoute(e *echo.Echo, db *gorm.DB) {
 	configGroup.POST("/update/:id", configController.Update)
 	configGroup.GET("/:id", configController.Detail)
 	configGroup.POST("/delete/:id", configController.Delete)
-	bGroup.POST("/admin/config/set-active/:id", configController.SetActive)
-	bGroup.POST("/admin/config/set-inactive/:id", configController.SetInactive)
+	backendGroup.POST("/check/config/set-active/:id", configController.SetActive)
+	backendGroup.POST("/check/config/set-inactive/:id", configController.SetInactive)
 
 	attendanceController := config.InjectAttendanceController(db)
 	attendanceGroup := backendGroup.Group("/attend")

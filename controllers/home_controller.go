@@ -21,7 +21,7 @@ func NewHomeController() HomeController {
 func (c *HomeController) Index(ctx echo.Context) error {
 	breadCrumbs := map[string]interface{}{
 		"menu": "Home",
-		"link": "/check/admin/home",
+		"link": "/check/home",
 	}
 	userInfo, _ := session.Manager.Get(ctx, session.SessionId)
 	return Render(ctx, "Home", "index", c.Menu, session.GetFlashMessage(ctx),

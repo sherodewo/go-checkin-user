@@ -65,16 +65,16 @@ func (c *AuthController) LoginLos(ctx echo.Context) error {
 	session.SetFlashMessage(ctx, "login success", "success", nil)
 	fmt.Println("ID : ", data.PhotoID)
 	if data.PhotoID == "" {
-		return ctx.Redirect(302, "/check/admin/register/profile")
+		return ctx.Redirect(302, "/check/register/profile")
 	}
-	return ctx.Redirect(302, "/check/admin/home")
+	return ctx.Redirect(302, "/check/home")
 }
 
 func (c *AuthController) Logout(ctx echo.Context) error {
 	err := session.Manager.Delete(ctx, session.SessionId)
 	if err != nil {
 		session.SetFlashMessage(ctx, err.Error(), "error", nil)
-		return ctx.Redirect(302, "/check/admin/home")
+		return ctx.Redirect(302, "/check/home")
 	}
 	session.SetFlashMessage(ctx, "logout success", "success", nil)
 	return ctx.Redirect(http.StatusFound, "/check/auth/login")

@@ -26,7 +26,7 @@ func NewAttendanceController(service *service.AttendanceService) AttendanceContr
 func (c *AttendanceController) PhotoIndex(ctx echo.Context) error {
 	breadCrumbs := map[string]interface{}{
 		"menu": "Photo",
-		"link": "/check/admin/photo",
+		"link": "/check/photo",
 	}
 	userInfo, _ := session.Manager.Get(ctx, session.SessionId)
 	return Render(ctx, "Home", "attendance/take_photo", c.Menu, session.GetFlashMessage(ctx),
@@ -36,7 +36,7 @@ func (c *AttendanceController) PhotoIndex(ctx echo.Context) error {
 func (c *AttendanceController) CheckIndex(ctx echo.Context) error {
 	breadCrumbs := map[string]interface{}{
 		"menu": "Check",
-		"link": "/check/admin/check",
+		"link": "/check/check",
 	}
 	userInfo, _ := session.Manager.Get(ctx, session.SessionId)
 	return Render(ctx, "Home", "attendance/check_in", c.Menu, session.GetFlashMessage(ctx),
