@@ -156,7 +156,7 @@ func BackendRoute(e *echo.Echo, db *gorm.DB) {
 
 	//userController
 	userController := config.InjectUserController(db)
-	userGroup := backendGroup.Group("/register", authorizationMiddleware.AuthorizationMiddleware(menus, "user"))
+	userGroup := backendGroup.Group("/register")
 	userGroup.GET("", userController.Index)
 	userGroup.POST("/store", userController.Store)
 	userGroup.GET("/add", userController.Add)

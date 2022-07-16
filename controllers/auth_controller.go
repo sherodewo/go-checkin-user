@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/foolin/goview/supports/echoview-v4"
 	"github.com/labstack/echo/v4"
 	"go-checkin/dto"
@@ -62,7 +63,10 @@ func (c *AuthController) LoginLos(ctx echo.Context) error {
 		return ctx.Redirect(302, "/check/auth/login")
 	}
 	session.SetFlashMessage(ctx, "login success", "success", nil)
-
+	fmt.Println("ID : ", data.PhotoID)
+	if data.PhotoID == "" {
+		return ctx.Redirect(302, "/check/admin/register/profile")
+	}
 	return ctx.Redirect(302, "/check/admin/home")
 }
 

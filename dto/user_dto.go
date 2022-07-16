@@ -11,11 +11,8 @@ type UserDto struct {
 }
 
 type UserUpdateDto struct {
-	Nik        string `json:"nik" form:"nik" validate:"required"`
-	Name       string `json:"name" form:"name" validate:"required"`
-	Email      string `json:"email" form:"email" validate:"required"`
-	Password   string `json:"password" form:"password"`
-	IsActive   int    `json:"is_active" form:"is_active"`
-	TypeUser   int    `json:"type_user" form:"type_user"`
-	UserRoleID string `json:"user_role_id" form:"user_role_id" validate:"required"`
+	Name     string `json:"name" form:"name" query:"name" validate:"required"`
+	Email    string `json:"email" form:"email" query:"email" validate:"required"`
+	Password string `json:"password" form:"password" query:"password"`
+	Image    string `json:"image" form:"image" query:"image"`
 }

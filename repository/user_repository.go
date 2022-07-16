@@ -13,6 +13,7 @@ type UserRepository interface {
 	FindBranch(id string) (models.UserDetail, error)
 	Save(models.User) (models.User, error)
 	Update(models.User) (models.User, error)
+	UploadPhoto(photo models.Photo) (models.Photo, error)
 	Delete(models.User) error
 	Count() (int64, error)
 	CountWhere(operation string, keyVal map[string]interface{}) (int64, error)
@@ -75,6 +76,11 @@ func (r userRepository) Save(entity models.User) (models.User, error) {
 
 func (r userRepository) Update(entity models.User) (models.User, error) {
 	err := r.DB.Model(models.User{UserID: entity.UserID}).UpdateColumns(&entity).Error
+	return entity, err
+}
+
+func (r userRepository) UploadPhoto(entity models.Photo) (models.Photo, error) {
+	err := r.DB.Create(&entity).Error
 	return entity, err
 }
 

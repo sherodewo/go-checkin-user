@@ -1,57 +1,57 @@
 {{define "content"}}
-    {{with user .ctx}}
-        <!--Begin::App-->
-        <div class="kt-grid kt-grid--desktop kt-grid--ver kt-grid--ver-desktop kt-app">
+{{with user .ctx}}
+<!--Begin::App-->
+<div class="kt-grid kt-grid--desktop kt-grid--ver kt-grid--ver-desktop kt-app">
 
-            <!--Begin:: App Aside Mobile Toggle-->
-            <button class="kt-app__aside-close" id="kt_user_profile_aside_close">
-                <i class="la la-close"></i>
-            </button>
+    <!--Begin:: App Aside Mobile Toggle-->
+    <button class="kt-app__aside-close" id="kt_user_profile_aside_close">
+        <i class="la la-close"></i>
+    </button>
 
-            <!--End:: App Aside Mobile Toggle-->
+    <!--End:: App Aside Mobile Toggle-->
 
-            <!--Begin:: App Aside-->
-            <div class="kt-grid__item kt-app__toggle kt-app__aside" id="kt_user_profile_aside">
+    <!--Begin:: App Aside-->
+    <div class="kt-grid__item kt-app__toggle kt-app__aside" id="kt_user_profile_aside">
 
-                <!--begin:: Widgets/Applications/User/Profile1-->
-                <div class="kt-portlet ">
-                    <div class="kt-portlet__head  kt-portlet__head--noborder">
-                        <div class="kt-portlet__head-label">
-                            <h3 class="kt-portlet__head-title">
-                            </h3>
+        <!--begin:: Widgets/Applications/User/Profile1-->
+        <div class="kt-portlet ">
+            <div class="kt-portlet__head  kt-portlet__head--noborder">
+                <div class="kt-portlet__head-label">
+                    <h3 class="kt-portlet__head-title">
+                    </h3>
+                </div>
+            </div>
+            <div class="kt-portlet__body kt-portlet__body--fit-y">
+
+                <!--begin::Widget -->
+                <div class="kt-widget kt-widget--user-profile-1">
+                    <div class="kt-widget__head">
+                        <div class="kt-widget__media">
+                            <img src="/check/assets/media/icons/avatar-dashboard.webp" alt="image">
+                        </div>
+                        <div class="kt-widget__content">
+                            <div class="kt-widget__section">
+                                <a href="#" class="kt-widget__username">
+                                    {{.Name}}
+                                    <i class="flaticon2-correct kt-font-success"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="kt-portlet__body kt-portlet__body--fit-y">
-
-                        <!--begin::Widget -->
-                        <div class="kt-widget kt-widget--user-profile-1">
-                            <div class="kt-widget__head">
-                                <div class="kt-widget__media">
-                                    <img src="{{.ImageUrl}}" alt="image">
-                                </div>
-                                <div class="kt-widget__content">
-                                    <div class="kt-widget__section">
-                                        <a href="#" class="kt-widget__username">
-                                            {{.Username}}
-                                            <i class="flaticon2-correct kt-font-success"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                    <div class="kt-widget__body">
+                        <div class="kt-widget__content">
+                            <div class="kt-widget__info">
+                                <span class="kt-widget__label">Username:</span>
+                                <a href="#" class="kt-widget__data">{{.Name}}</a>
                             </div>
-                            <div class="kt-widget__body">
-                                <div class="kt-widget__content">
-                                    <div class="kt-widget__info">
-                                        <span class="kt-widget__label">Username:</span>
-                                        <a href="#" class="kt-widget__data">{{.Username}}</a>
-                                    </div>
-                                    <div class="kt-widget__info">
-                                        <span class="kt-widget__label">Email:</span>
-                                        <a href="#" class="kt-widget__data">{{.Email}}</a>
-                                    </div>
-                                </div>
-                                <div class="kt-widget__items">
-                                    <a href="/check/admin/user/profile"
-                                       class="kt-widget__item kt-widget__item--active">
+                            <div class="kt-widget__info">
+                                <span class="kt-widget__label">Email:</span>
+                                <a href="#" class="kt-widget__data">{{.Email}}</a>
+                            </div>
+                        </div>
+                        <div class="kt-widget__items">
+                            <a href="/check/admin/register/profile"
+                               class="kt-widget__item kt-widget__item--active">
                                         <span class="kt-widget__section">
                                             <span class="kt-widget__icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -75,77 +75,147 @@
                                                 Personal Information
                                             </span>
                                         </span>
-                                    </a>
-                                </div>
-                            </div>
+                            </a>
                         </div>
-
-                        <!--end::Widget -->
                     </div>
                 </div>
 
-                <!--end:: Widgets/Applications/User/Profile1-->
+                <!--end::Widget -->
             </div>
+        </div>
 
-            <!--End:: App Aside-->
+        <!--end:: Widgets/Applications/User/Profile1-->
+    </div>
 
-            <!--Begin:: App Content-->
-            <div class="kt-grid__item kt-grid__item--fluid kt-app__content">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="kt-portlet">
-                            <div class="kt-portlet__head">
-                                <div class="kt-portlet__head-label">
-                                    <h3 class="kt-portlet__head-title">Personal Information <small>update your personal
-                                            informaiton</small></h3>
-                                </div>
-                            </div>
-                            <form class="kt-form kt-form--label-right">
-                                <div class="kt-portlet__body">
-                                    <div class="kt-section kt-section--first">
-                                        <div class="kt-section__body">
-                                            <div class="row">
-                                                <label class="col-xl-3"></label>
-                                                <div class="col-lg-9 col-xl-6">
-                                                    <h3 class="kt-section__title kt-section__title-sm">Profile
-                                                        Info:</h3>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Avatar</label>
-                                                <div class="col-lg-9 col-xl-6">
-                                                    <div class="kt-avatar kt-avatar--outline" id="kt_user_avatar">
-                                                        <div class="kt-avatar__holder"
-                                                             style="background-image: url({{.ImageUrl}})"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Username</label>
-                                                <div class="col-lg-9 col-xl-6">
-                                                    <input class="form-control" type="text" name="username" disabled value="{{.Username}}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Email</label>
-                                                <div class="col-lg-9 col-xl-6">
-                                                    <input class="form-control" type="text" disabled name="email" value="{{.Email}}">
-                                                </div>
+    <!--End:: App Aside-->
+
+    <!--Begin:: App Content-->
+    <div class="kt-grid__item kt-grid__item--fluid kt-app__content">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">Personal Information <small>update your personal
+                                informaiton</small></h3>
+                        </div>
+                    </div>
+                    <form class="kt-form kt-form--label-right" action="/check/admin/register/update/{{.UserID}}" method="POST" enctype="multipart/form-data">
+                        <div class="kt-portlet__body">
+                            <div class="kt-section kt-section--first">
+                                <div class="kt-section__body">
+                                    <div class="row">
+                                        <label class="col-xl-3"></label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <h3 class="kt-section__title kt-section__title-sm">Profile
+                                                Info:</h3>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">Avatar</label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <div class="kt-avatar kt-avatar--outline kt-avatar--circle-"
+                                                 id="kt_user_edit_avatar">
+                                                <div class="kt-avatar__holder"
+                                                     style="background-image: url('/check/assets/media/users/300_20.jpg');"></div>
+                                                <label class="kt-avatar__upload" data-toggle="kt-tooltip" title=""
+                                                       data-original-title="Change avatar">
+                                                    <i class="fa fa-pen"></i>
+                                                    <input type="file" name="image" accept=".png, .jpg, .jpeg">
+                                                </label>
+                                                <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title=""
+                                                      data-original-title="Cancel avatar">
+                                                    <i class="fa fa-times"></i>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="kt-portlet__foot">
-                                    <div class="kt-form__actions">
-
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">Username</label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <input class="form-control" type="text" name="name" value="{{.Name}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">Email</label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <input class="form-control" type="text" name="email" value="{{.Email}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">New Password</label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <input class="form-control" type="text" name="password">
+                                        </div>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
-                    </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="text-right">
+                                    <button type="submit" id="submit-form" class="btn btn-primary align-right">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <!--End:: App Content-->
         </div>
-    {{end}}
+    </div>
+    <!--End:: App Content-->
+</div>
+
+<script>
+    var KTUserEdit = function () {
+        // Base elements
+        var avatar;
+
+        var initUserForm = function() {
+            avatar = new KTAvatar('kt_user_edit_avatar');
+        }
+
+        return {
+            // public functions
+            init: function() {
+                initUserForm();
+            }
+        };
+    }();
+
+    jQuery(document).ready(function() {
+        KTUserEdit.init();
+    });
+
+    // $('#submit-form').click(function (){
+    //     $.ajax({
+    //         url: "/check/admin/register/update/"+id,
+    //         data: data,
+    //         type: "POST",
+    //         beforeSend: function (res) {
+    //         },
+    //         success: function (res) {
+    //             Swal.fire(
+    //                 'Edit!',
+    //                 'User has been edit.',
+    //                 'success'
+    //             );
+    //             setTimeout(function () {
+    //                 location.reload();
+    //             }, 2000)
+    //             // location.reload()
+    //         },
+    //         error: function (res) {
+    //             Swal.fire(
+    //                 'Edit!',
+    //                 'User has not been edit.',
+    //                 'error'
+    //             );
+    //             location.reload()
+    //         }
+    //
+    //     });
+    // })
+</script>
+{{end}}
 {{end}}

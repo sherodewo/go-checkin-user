@@ -9,7 +9,9 @@ import (
 	"go-checkin/utils/session"
 	"gopkg.in/go-playground/validator.v9"
 	"gorm.io/gorm"
+	"io"
 	"net/http"
+	"os"
 	"strconv"
 )
 
@@ -204,35 +206,36 @@ func (c *UserController) Update(ctx echo.Context) error {
 		}
 		return ctx.JSON(400, echo.Map{"message": "error validation", "errors": validationErrors})
 	}
-	//remove file before upload
-	//f, err := c.service.FindUserById(id)
-	//if err != nil {
-	//	if errors.Is(err, gorm.ErrRecordNotFound) {
-	//		return ctx.JSON(400, echo.Map{"message": "data user not found"})
-	//	}
-	//	return ctx.JSON(400, echo.Map{"message": "error get data user"})
-	//}
-	//if f.ImageUrl != "" {
-	//	if err := utils.RemoveFile(f.ImageUrl); err != nil {
-	//		return ctx.JSON(400, echo.Map{"message": "error remove image user"})
-	//	}
-	//}
-	//
-	//var fileName string
-	//if userDto.Image != "" {
-	//	f, err := utils.UploadImageV2(userDto.Image)
-	//	if err != nil {
-	//		return ctx.JSON(400, echo.Map{"message": "error upload image"})
-	//	}
-	//	fileName = f
-	//}
 
-	result, err := c.service.UpdateUser(id, userDto)
+	file, err := ctx.FormFile("image")
+	if err != nil {
+		return err
+	}
+	src, err := file.Open()
+	if err != nil {
+		return err
+	}
+	defer src.Close()
+
+	// Destination
+	userDto.Image = "assets/avatar/" + file.Filename
+	dst, err := os.Create(userDto.Image)
+	if err != nil {
+		return err
+	}
+	defer dst.Close()
+
+	// Copy
+	if _, err = io.Copy(dst, src); err != nil {
+		return err
+	}
+
+	_, err = c.service.UpdateUser(id, userDto)
 	if err != nil {
 		return ctx.JSON(400, echo.Map{"message": "error update data user"})
 	}
 	session.SetFlashMessage(ctx, "update data success", "success", nil)
-	return ctx.JSON(200, echo.Map{"message": "data has been updated", "data": result})
+	return ctx.Redirect(302, "/check/admin/home")
 }
 
 func (c *UserController) Delete(ctx echo.Context) error {

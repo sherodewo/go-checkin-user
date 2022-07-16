@@ -9,6 +9,7 @@ build/*.env
 *.pub
 *.log
 .DS_Store
+/assets/avatar/*
 # Temp
 tmp
 

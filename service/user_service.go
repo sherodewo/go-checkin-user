@@ -1,8 +1,6 @@
 package service
 
 import (
-	"crypto/md5"
-	"encoding/hex"
 	"go-checkin/dto"
 	"go-checkin/models"
 	"go-checkin/repository"
@@ -50,19 +48,22 @@ func (s *UserService) SaveUser(dto dto.UserDto) (*models.User, error) {
 }
 
 func (s *UserService) UpdateUser(id string, dto dto.UserUpdateDto) (*models.User, error) {
-	hashPassword := md5.New()
-	hashPassword.Write([]byte(dto.Password))
-	password := hex.EncodeToString(hashPassword.Sum(nil))
+
+	img := models.Photo{
+		UserID:    id,
+		Path:      dto.Image,
+		CreatedAt: time.Now(),
+	}
+	dataImg, _ := s.UserRepository.UploadPhoto(img)
+
+	password, _ := utils.HashPassword(dto.Password)
+
 	var entity models.User
 	entity.UserID = id
-	entity.Nik = dto.Nik
 	entity.Name = dto.Name
 	entity.Email = dto.Email
-	entity.IsActive = dto.IsActive
+	entity.PhotoID = dataImg.ID
 
-	if &entity.TypeUser != nil {
-		entity.TypeUser = dto.TypeUser
-	}
 	if dto.Password != "" {
 		entity.Password = password
 	}
