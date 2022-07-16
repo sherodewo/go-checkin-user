@@ -12,6 +12,21 @@
     {{block "styles" .}}
     {{end}}
     <link rel="shortcut icon" href="/check/assets/media/logos/favicon.ico"/>
+    <link href="/check/assets/plugins/custom/uppy/uppy.bundle.css" rel="stylesheet" type="text/css"/>
+    <style>
+
+        .embedMap {
+            height: 300px;
+            width: 810px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .embedMap {
+                height: 300px;
+                width: 250px;
+            }
+        }
+    </style>
 </head>
 
 <!-- end::Head -->
@@ -31,7 +46,8 @@
         <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
 
             <!-- begin:: Header -->
-            <div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed " data-ktheader-minimize="on" style="background-color: gold">
+            <div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed " data-ktheader-minimize="on"
+                 style="background-color: gold">
                 <div class="kt-container  kt-container--fluid ">
 
                     <!-- begin:: Brand -->
@@ -44,7 +60,7 @@
                     <div class="kt-header__topbar">
 
                         <!--begin: Search -->
-{{/*                        {{template "search" .}}*/}}
+                        {{/* {{template "search" .}}*/}}
 
 
                         <!--end: Search -->
@@ -56,26 +72,26 @@
                         <!--end: Notifications -->
 
                         <!--begin: Quick actions -->
-                        {{/*                        {{template "quick-action" .}}*/}}
+                        {{/* {{template "quick-action" .}}*/}}
 
 
                         <!--end: Quick actions -->
 
                         <!--begin: Cart -->
-                        {{/*                        {{template "chart" .}}*/}}
+                        {{/* {{template "chart" .}}*/}}
 
 
                         <!--end: Cart-->
 
                         <!--begin: Quick panel toggler -->
-                        {{/*                        {{template "quick-panel-toogle" .}}*/}}
+                        {{/* {{template "quick-panel-toogle" .}}*/}}
 
 
                         <!--end: Quick panel toggler -->
 
                         <!--begin: Language bar -->
 
-                        {{/*                        {{template "language" .}}*/}}
+                        {{/* {{template "language" .}}*/}}
 
                         <!--end: Language bar -->
 

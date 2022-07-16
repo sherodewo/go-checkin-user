@@ -11,128 +11,431 @@ ATTANDANCE{{define "content"}}
 {{end}}
 <p class="text-center">ATTENDANCE</p>
 
-<div class="card">
-    <div class="card-header">
-        Welcome, {{.data.Name}}
-    </div>
-    <div class="card-body">
-        <table class="table table-striped- cell-border table-hover table-checkable" id="kt_table"
-               style="width: 100%">
-            <thead>
-            <!--            <tr>-->
-            <!--                <th style="visibility: hidden">Id</th>-->
-            <!--                <th style="visibility: hidden">Id</th>-->
-            <!--&lt;!&ndash;                <th>Nik</th>&ndash;&gt;-->
-            <!--&lt;!&ndash;                <th>Name</th>&ndash;&gt;-->
-            <!--&lt;!&ndash;                <th>Email</th>&ndash;&gt;-->
-            <!--&lt;!&ndash;                <th>Role</th>&ndash;&gt;-->
-            <!--&lt;!&ndash;                <th>Status</th>&ndash;&gt;-->
-            <!--&lt;!&ndash;                <th class="text-center">Action</th>&ndash;&gt;-->
-            <!--            </tr>-->
-            <tr>
-                <td style="width: 20%">
-                    <span class="kt-media kt-media--circle kt-media--sm">
-                        <img src="/check/assets/media/users/100_12.jpg" alt="image">
-                    </span>
-                </td>
-                <td style="width: 40%"><small>Friday, 24 June <br> Worked for 15 Hrs 32 Min</small></td>
-                <td style="width: 40%">
-                    <div class="text-right">
-                        <small>08.00<br>16.00</small>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 20%">
-                    <span class="kt-media kt-media--circle kt-media--sm">
-                        <img src="/check/assets/media/users/100_12.jpg" alt="image">
-                    </span>
-                </td>
-                <td style="width: 40%"><small>Friday, 24 June <br> Worked for 15 Hrs 32 Min</small></td>
-                <td style="width: 40%">
-                    <div class="text-right">
-                        <small>08.00<br>16.00</small>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 20%">
-                    <span class="kt-media kt-media--circle kt-media--sm">
-                        <img src="/check/assets/media/users/100_12.jpg" alt="image">
-                    </span>
-                </td>
-                <td style="width: 40%"><small>Friday, 24 June <br> Worked for 15 Hrs 32 Min</small></td>
-                <td style="width: 40%">
-                    <div class="text-right">
-                        <small>08.00<br>16.00</small>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 20%">
-                    <span class="kt-media kt-media--circle kt-media--sm">
-                        <img src="/check/assets/media/users/100_12.jpg" alt="image">
-                    </span>
-                </td>
-                <td style="width: 40%"><small>Friday, 24 June <br> Worked for 15 Hrs 32 Min</small></td>
-                <td style="width: 40%">
-                    <div class="text-right">
-                        <small>08.00<br>16.00</small>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 20%">
-                    <span class="kt-media kt-media--circle kt-media--sm">
-                        <img src="/check/assets/media/users/100_12.jpg" alt="image">
-                    </span>
-                </td>
-                <td style="width: 40%"><small>Friday, 24 June <br> Worked for 15 Hrs 32 Min</small></td>
-                <td style="width: 40%">
-                    <div class="text-right">
-                        <small>08.00<br>16.00</small>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 20%">
-                    <span class="kt-media kt-media--circle kt-media--sm">
-                        <img src="/check/assets/media/users/100_12.jpg" alt="image">
-                    </span>
-                </td>
-                <td style="width: 40%"><small>Friday, 24 June <br> Worked for 15 Hrs 32 Min</small></td>
-                <td style="width: 40%">
-                    <div class="text-right">
-                        <small>08.00<br>16.00</small>
-                    </div>
-                </td>
-            </tr>
-            
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-portlet">
+        <div class="kt-portlet__body kt-portlet__body--fit">
+            <div class="kt-grid kt-wizard-v1 kt-wizard-v1--white" id="kt_wizard_v1" data-ktwizard-state="step-first">
+                <div class="kt-grid__item">
 
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+                    <!--begin: Form Wizard Nav -->
+                    <div class="kt-wizard-v1__nav">
 
-    </div>
-    <div class="card-footer">
-        <div class="text-center">
-            <a type="button" class="btn btn-outline-brand btn-elevate btn-circle btn-icon" href="#"><i
-                    class="fa fa-fingerprint"></i></a>&nbsp;
-            <h6>ADD ATTENDANCE</h6>
+                        <!--doc: Remove "kt-wizard-v1__nav-items--clickable" class and also set 'clickableSteps: false' in the JS init to disable manually clicking step titles -->
+                        <div class="kt-wizard-v1__nav-items kt-wizard-v1__nav-items--clickable">
+                            <div class="kt-wizard-v1__nav-item" data-ktwizard-type="step" data-ktwizard-state="current">
+                                <div class="kt-wizard-v1__nav-body">
+                                    <div class="kt-wizard-v1__nav-icon">
+                                        <i class="flaticon-responsive"></i>
+                                    </div>
+                                    <div class="kt-wizard-v1__nav-label">
+                                        1. Take Photo
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="kt-wizard-v1__nav-item" data-ktwizard-type="step">
+                                <div class="kt-wizard-v1__nav-body">
+                                    <div class="kt-wizard-v1__nav-icon">
+                                        <i class="flaticon-bus-stop"></i>
+                                    </div>
+                                    <div class="kt-wizard-v1__nav-label">
+                                        2. Take Location
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--end: Form Wizard Nav -->
+                </div>
+                <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v1__wrapper">
+
+                    <!--begin: Form Wizard Form-->
+                    <form class="kt-form" id="kt_form">
+
+                        <!--begin: Form Wizard Step 1-->
+                        <div class="kt-wizard-v1__content" data-ktwizard-type="step-content"
+                             data-ktwizard-state="current">
+                            <div class="kt-heading kt-heading--md">Take Picture of You</div>
+                            <div class="kt-form__section kt-form__section--first">
+                                <div class="kt-wizard-v1__form">
+                                    <div class="row">
+                                        <div class="col-lg">
+                                            <div class="kt-portlet kt-portlet--height-fluid">
+                                                <div class="kt-portlet__head">
+                                                    <div class="kt-portlet__head-label">
+                                                        <h3 class="kt-portlet__head-title">
+                                                            Auto Upload With External Sources
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="kt-portlet__body">
+                                                    <div class="kt-uppy" id="kt_uppy_1">
+                                                        <div class="kt-uppy__dashboard"></div>
+                                                        <div class="kt-uppy__progress"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--end: Form Wizard Step 1-->
+
+                        <!--begin: Form Wizard Step 2-->
+                        <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
+                            <div class="kt-heading kt-heading--md">Enter the Details of your Delivery</div>
+                            <div class="kt-form__section kt-form__section--first">
+                                <div class="kt-wizard-v1__form">
+                                    <div class="kt-portlet kt-portlet--tab">
+                                        <div class="kt-portlet__head">
+                                            <div class="kt-portlet__head-label">
+														<span class="kt-portlet__head-icon kt-hidden">
+															<i class="la la-gear"></i>
+														</span>
+                                                <h3 class="kt-portlet__head-title">
+                                                    Geolocation
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <input type="text" id="maps" name="maps" hidden>
+                                        <script>
+
+                                            const fetchLocationName = async (lat, lng) => {
+                                                await fetch(
+                                                    'https://www.mapquestapi.com/geocoding/v1/reverse?key=G1moSFJkXvMTf7kCVqTOPMh1SxtvJaGi&location=' + lat + '%2C' + lng + '&outFormat=json&thumbMaps=false',
+                                                )
+                                                    .then((response) => response.json())
+                                                    .then((responseJson) => {
+                                                        console.log(
+                                                            'ADDRESS GEOCODE is BACK!! => ' + JSON.stringify(responseJson),
+                                                        );
+                                                        $('#maps').val(JSON.stringify(responseJson))
+                                                    });
+                                            };
+
+                                            function showPosition() {
+                                                if (navigator.geolocation) {
+                                                    navigator.geolocation.getCurrentPosition(showMap, showError);
+                                                } else {
+                                                    alert("Sorry, your browser does not support HTML5 geolocation.");
+                                                }
+                                            }
+
+                                            function showMap(position) {
+                                                // Get location data
+                                                lat = position.coords.latitude;
+                                                long = position.coords.longitude;
+
+                                                console.log("LONGLAT : ", lat)
+                                                console.log("LONGLAT : ", long)
+
+                                                fetchLocationName(lat, long)
+
+                                                var latlong = new google.maps.LatLng(lat, long);
+
+                                                var myOptions = {
+                                                    center: latlong,
+                                                    zoom: 16,
+                                                    mapTypeControl: true,
+                                                    navigationControlOptions: {
+                                                        style: google.maps.NavigationControlStyle.SMALL
+                                                    }
+                                                }
+
+                                                var map = new google.maps.Map(document.getElementById("embedMap"), myOptions);
+                                                var marker = new google.maps.Marker({
+                                                    position: latlong,
+                                                    map: map,
+                                                    title: "You are here!"
+                                                });
+                                            }
+
+                                            // Define callback function for failed attempt
+                                            function showError(error) {
+                                                if (error.code == 1) {
+                                                    result.innerHTML = "You've decided not to share your position, but it's OK. We won't ask you again.";
+                                                } else if (error.code == 2) {
+                                                    result.innerHTML = "The network is down or the positioning service can't be reached.";
+                                                } else if (error.code == 3) {
+                                                    result.innerHTML = "The attempt timed out before it could get the location data.";
+                                                } else {
+                                                    result.innerHTML = "Geolocation failed due to unknown error.";
+                                                }
+                                            }
+                                        </script>
+                                        <div class="kt-portlet__body">
+                                            <div id="kt_gmap_4" style="height:300px;">
+                                                <button type="button" onclick="showPosition()">Show My Position on
+                                                    Google Map
+                                                </button>
+                                                <div id="embedMap" class="embedMap">
+                                                    <!--Google map will be embedded here-->
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>TAG / PROJECT</label>
+                                        <select class="form-control kt-select2" id="project"
+                                                name="project_id" style="width: 100%;">
+                                            <option selected disabled>TAG/PROJECT</option>
+                                            <option value="WFH">WFH</option>
+                                            <option value="WFO">WFO</option>
+                                            <option value="WFA">WFA</option>
+                                        </select>
+                                        <span class="form-text text-muted">Please select Tag / Project.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--end: Form Wizard Step 2-->
+
+                        <!--begin: Form Actions -->
+                        <div class="kt-form__actions">
+                            <button class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                                    data-ktwizard-type="action-prev">
+                                Previous
+                            </button>
+                            <button class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                                    data-ktwizard-type="action-submit">
+                                Submit
+                            </button>
+                            <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                                    data-ktwizard-type="action-next">
+                                Next Step
+                            </button>
+                        </div>
+
+                        <!--end: Form Actions -->
+                    </form>
+
+                    <!--end: Form Wizard Form-->
+                </div>
+            </div>
         </div>
     </div>
+    <script src="/check/assets/js/pages/custom/wizard/wizard-1.js" type="text/javascript"></script>
 
-</div>
-<script>
-    function setCookie(name, value, days) {
-        var expires = "";
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
+    <script>
+
+        $('#project_id').select2({
+            width: 'resolve',
+            placeholder: "Select a Score Models",
+        });
+
+        GMaps.geolocate({
+            success: function (position) {
+                map.setCenter(position.coords.latitude, position.coords.longitude);
+            },
+            error: function (error) {
+                alert('Geolocation failed: ' + error.message);
+            },
+            not_supported: function () {
+                alert("Your browser does not support geolocation");
+            },
+            always: function () {
+                alert("Done!");
+            }
+        });
+
+        var initValidation = function () {
+            validator = formEl.validate({
+                // Validate only visible fields
+                ignore: ":hidden",
+
+                // Validation rules
+                rules: {
+                    //= Step 1
+                    name: {
+                        required: true
+                    },
+                    endpoint: {
+                        required: true
+                    },
+                    save_result_to: {
+                        required: true
+                    },
+                    save_result_object_name: {
+                        required: true
+                    },
+                    score_models_rules: {
+                        required: true
+                    },
+
+                    //= Step 2
+                    param_request_payload: {
+                        required: true
+                    },
+                    field_pickle: {
+                        required: true
+                    },
+                    data_type: {
+                        required: true
+                    },
+                    is_required: {
+                        required: true
+                    },
+                    length: {
+                        required: true
+                    },
+                },
+
+                // Display error
+                invalidHandler: function (event, validator) {
+                    KTUtil.scrollTop();
+
+                    swal.fire({
+                        "title": "",
+                        "text": "There are some errors in your submission. Please correct them.",
+                        "type": "error",
+                        "confirmButtonClass": "btn btn-secondary"
+                    });
+                },
+
+                // Submit valid form
+                submitHandler: function (form) {
+
+                }
+            });
         }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/";
-    }
-</script>
-{{end}}
+
+        var initSubmit = function () {
+            var btn = formEl.find('[data-ktwizard-type="action-submit"]');
+            btn.on('click', function (e) {
+                e.preventDefault();
+
+                if (validator.form()) {
+                    // See: src\js\framework\base\app.js
+                    btnSubmit = btn
+                    KTApp.progress(btn);
+                    // setTimeout(function (){
+                    //     KTApp.unprogress(btn);
+                    // })
+                    //KTApp.block(formEl);
+
+                    // See: http://malsup.com/jquery/form/#ajaxSubmit
+
+                    // formEl.ajaxSubmit({
+                    //     beforeSubmit:  function (){
+                    //         return output
+                    //     },
+                    //     // pre-submit callback
+                    //     success: function () {
+                    //         KTApp.unprogress(btn);
+                    //         //KTApp.unblock(formEl);
+                    //
+                    //         swal.fire({
+                    //             "title": "",
+                    //             "text": "The application has been successfully submitted!",
+                    //             "type": "success",
+                    //             "confirmButtonClass": "btn btn-secondary"
+                    //         });
+                    //         // location.replace("/scorepro/admin/score-generator")
+                    //     },
+                    //     error: function (res) {
+                    //         KTApp.unprogress(btn);
+                    //         swal.fire({
+                    //             "title": res,
+                    //             "text": "The application unsuccessfull !",
+                    //             "type": "error",
+                    //             "confirmButtonClass": "btn btn-secondary"
+                    //         });
+                    //     }
+                    // });
+                }
+            });
+        }
+
+        return {
+            // public functions
+            init: function () {
+                wizardEl = KTUtil.get('kt_wizard_v1');
+                formEl = $('#kt_form');
+
+                initWizard();
+                initValidation();
+                initSubmit();
+            }
+        };
+        }
+        ();
+
+        jQuery(document).ready(function () {
+            KTWizard1.init();
+        });
+
+
+        var groupParamsByKey = (params) => [...params.entries()].reduce((acc, tuple) => {
+            // getting the key and value from each tuple
+            var [key, val] = tuple;
+            if (acc.hasOwnProperty(key)) {
+                // if the current key is already an array, we'll add the value to it
+                if (Array.isArray(acc[key])) {
+                    acc[key] = [...acc[key], val].toString()
+                } else {
+                    // if it's not an array, but contains a value, we'll convert it into an array
+                    // and add the current value to it
+                    acc[key] = [acc[key], val].toString();
+                }
+            } else {
+                // plain assignment if no special case is present
+                acc[key] = val;
+            }
+
+            return acc;
+        }, {});
+
+        $('#data-submit').click(function () {
+            var params = new URLSearchParams($('#kt_form').serialize() + "&file_pickle=" + fileName);
+            var output = groupParamsByKey(params);
+            $.ajax({
+                url: "/scorepro/admin/score-generator/store",
+                data: output,
+                dataType: "json",
+                type: "POST",
+                beforeSend: function (res) {
+                },
+                success: function () {
+                    KTApp.unprogress(btnSubmit);
+                    //KTApp.unblock(formEl);
+
+                    swal.fire({
+                        "title": "",
+                        "text": "The application has been successfully submitted!",
+                        "type": "success",
+                        "confirmButtonClass": "btn btn-secondary"
+                    });
+                    location.replace("/scorepro/admin/score-generator")
+                },
+                error: function (xhr) {
+                    KTApp.unprogress(btnSubmit);
+
+                    swal.fire({
+                        "title": xhr.responseText,
+                        "text": "The application unsuccessfull !",
+                        "type": "error",
+                        "confirmButtonClass": "btn btn-secondary",
+                        width: '800px'
+
+                    });
+                }
+            })
+        })
+
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+    </script>
+    {{end}}

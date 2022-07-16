@@ -34,21 +34,21 @@ var KTUppy = function () {
 			browserBackButtonClose: true
 		}
 
-		var uppyDashboard = Uppy.Core({ 
+		var uppyDashboard = Uppy.Core({
 			autoProceed: true,
 			restrictions: {
 				maxFileSize: 1000000, // 1mb
 				maxNumberOfFiles: 5,
 				minNumberOfFiles: 1
-			} 
+			}
 		});
 
-		uppyDashboard.use(Dashboard, options);  
-		uppyDashboard.use(Tus, { endpoint: 'https://master.tus.io/files/' });
-		uppyDashboard.use(GoogleDrive, { target: Dashboard, companionUrl: 'https://companion.uppy.io' });
-		uppyDashboard.use(Dropbox, { target: Dashboard, companionUrl: 'https://companion.uppy.io' });
-		uppyDashboard.use(Instagram, { target: Dashboard, companionUrl: 'https://companion.uppy.io' });
-		uppyDashboard.use(Webcam, { target: Dashboard });
+		uppyDashboard.use(Dashboard, options);
+		// uppyDashboard.use(Tus, { endpoint: 'https://master.tus.io/files/' });
+		// uppyDashboard.use(GoogleDrive, { target: Dashboard, companionUrl: 'https://companion.uppy.io' });
+		// uppyDashboard.use(Dropbox, { target: Dashboard, companionUrl: 'https://companion.uppy.io' });
+		// uppyDashboard.use(Instagram, { target: Dashboard, companionUrl: 'https://companion.uppy.io' });
+		uppyDashboard.use(Webcam, { target: Dashboard, companionUrl:'localhost:9001/wew' });
 	}
 
 	var initUppy2 = function(){
