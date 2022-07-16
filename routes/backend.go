@@ -184,5 +184,6 @@ func BackendRoute(e *echo.Echo, db *gorm.DB) {
 	attendanceGroup.GET("/checkin", attendanceController.CheckIndex)
 	attendanceGroup.POST("/check-photo", attendanceController.PhotoCheck)
 	attendanceGroup.POST("/checkin", attendanceController.Checkin)
+	attendanceGroup.POST("/wew", attendanceController.Checkin)
 
 }

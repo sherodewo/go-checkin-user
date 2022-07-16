@@ -17,6 +17,7 @@ require (
 	github.com/labstack/gommon v0.3.1
 	github.com/rs/xid v1.3.0
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5
+	google.golang.org/grpc v1.48.0
 	gopkg.in/go-playground/validator.v9 v9.31.0
 	gorm.io/driver/mysql v1.3.2
 	gorm.io/gorm v1.23.3

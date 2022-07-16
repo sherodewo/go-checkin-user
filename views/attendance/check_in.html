@@ -51,7 +51,7 @@ ATTANDANCE{{define "content"}}
                 <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v1__wrapper">
 
                     <!--begin: Form Wizard Form-->
-                    <form class="kt-form" id="kt_form">
+                    <form class="kt-form" id="kt_form" action="/check/attend/checkin" method="POST">
 
                         <!--begin: Form Wizard Step 1-->
                         <div class="kt-wizard-v1__content" data-ktwizard-type="step-content"
@@ -78,6 +78,7 @@ ATTANDANCE{{define "content"}}
                                             </div>
                                         </div>
                                     </div>
+                                    <input type="text" name="image_url" id="image_url" hidden>
 
                                 </div>
                             </div>
@@ -129,9 +130,6 @@ ATTANDANCE{{define "content"}}
                                                 // Get location data
                                                 lat = position.coords.latitude;
                                                 long = position.coords.longitude;
-
-                                                console.log("LONGLAT : ", lat)
-                                                console.log("LONGLAT : ", long)
 
                                                 fetchLocationName(lat, long)
 
@@ -227,21 +225,6 @@ ATTANDANCE{{define "content"}}
         $('#project_id').select2({
             width: 'resolve',
             placeholder: "Select a Score Models",
-        });
-
-        GMaps.geolocate({
-            success: function (position) {
-                map.setCenter(position.coords.latitude, position.coords.longitude);
-            },
-            error: function (error) {
-                alert('Geolocation failed: ' + error.message);
-            },
-            not_supported: function () {
-                alert("Your browser does not support geolocation");
-            },
-            always: function () {
-                alert("Done!");
-            }
         });
 
         var initValidation = function () {

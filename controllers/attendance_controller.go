@@ -1,11 +1,14 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/labstack/echo/v4"
 	"go-checkin/models"
 	"go-checkin/service"
 	"go-checkin/utils/session"
 	"gopkg.in/go-playground/validator.v9"
+	"io"
+	"os"
 )
 
 type AttendanceController struct {
@@ -76,5 +79,29 @@ func (c *AttendanceController) PhotoCheck(ctx echo.Context) error {
 }
 
 func (c *AttendanceController) Checkin(ctx echo.Context) error {
+	fmt.Println("MASUK GAAA")
+	file, err := ctx.FormFile("name")
+	if err != nil {
+		return err
+	}
+	src, err := file.Open()
+	if err != nil {
+		return err
+	}
+	defer src.Close()
+
+	// Destination
+
+	dst, err := os.Create(file.Filename)
+	if err != nil {
+		return err
+	}
+	defer dst.Close()
+
+	// Copy
+	if _, err = io.Copy(dst, src); err != nil {
+		return err
+	}
+
 	return nil
 }
