@@ -1,14 +1,12 @@
 package controllers
 
 import (
-	"fmt"
 	"github.com/labstack/echo/v4"
 	"go-checkin/models"
 	"go-checkin/service"
 	"go-checkin/utils/session"
 	"gopkg.in/go-playground/validator.v9"
-	"io"
-	"os"
+	"net/http"
 )
 
 type AttendanceController struct {
@@ -46,8 +44,8 @@ func (c *AttendanceController) CheckIndex(ctx echo.Context) error {
 		append(c.BreadCrumbs, breadCrumbs), userInfo)
 }
 
-func (c *AttendanceController) PhotoCheck(ctx echo.Context) error {
-	var req models.PhotoRequest
+func (c *AttendanceController) Checkin(ctx echo.Context) error {
+	var req models.Checkin
 	if err := ctx.Bind(&req); err != nil {
 		return ctx.JSON(400, echo.Map{"message": "error binding data"})
 	}
@@ -59,49 +57,20 @@ func (c *AttendanceController) PhotoCheck(ctx echo.Context) error {
 		}
 		return ctx.JSON(400, echo.Map{"message": "error validation", "errors": validationErrors})
 	}
-	// Get User Session
-	result, err := session.Manager.Get(ctx, session.SessionId)
+	// Get image name by user id
+
+	// Face Compare
+	isMatch, err, photo := c.service.PhotoCompare(req)
+	if err != nil || !isMatch {
+		return ctx.JSON(400, echo.Map{"message": "Not Matched", "errors": err})
+	}
+
+	// Save attendance
+	err = c.service.Save(req, *photo)
 	if err != nil {
-		return ctx.JSON(400, echo.Map{"message": "error get session", "errors": err})
-	}
-	userInfo := result.(session.UserInfo)
+		return ctx.JSON(400, echo.Map{"message": "Failed save to database", "errors": err})
 
-	// Compare 2 Face
-	isSimiliar, err := c.service.PhotoCompare(req, userInfo.UserID)
-	if err != nil {
-		return ctx.JSON(400, echo.Map{"message": "error Compare photo", "errors": err})
 	}
 
-	if isSimiliar {
-		return ctx.JSON(200, isSimiliar)
-	}
-	return nil
-}
-
-func (c *AttendanceController) Checkin(ctx echo.Context) error {
-	fmt.Println("MASUK GAAA")
-	file, err := ctx.FormFile("name")
-	if err != nil {
-		return err
-	}
-	src, err := file.Open()
-	if err != nil {
-		return err
-	}
-	defer src.Close()
-
-	// Destination
-
-	dst, err := os.Create(file.Filename)
-	if err != nil {
-		return err
-	}
-	defer dst.Close()
-
-	// Copy
-	if _, err = io.Copy(dst, src); err != nil {
-		return err
-	}
-
-	return nil
+	return ctx.JSON(http.StatusOK, "BERHASIL")
 }

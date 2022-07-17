@@ -1,9 +1,18 @@
 package service
 
 import (
+	"encoding/json"
+	"errors"
+	"fmt"
+	jsoniter "github.com/json-iterator/go"
 	"go-checkin/httpclient"
 	"go-checkin/models"
 	"go-checkin/repository"
+	"io"
+	"net/http"
+	"os"
+	"path"
+	"time"
 )
 
 type AttendanceService struct {
@@ -16,8 +25,23 @@ func NewAttendanceService(repository repository.AttendanceRepository) *Attendanc
 	}
 }
 
-func (s *AttendanceService) Save(req models.Checkin) error {
-	err := s.AttendanceRepository.Save(req)
+func (s *AttendanceService) Save(req models.Checkin, photo models.Photo) error {
+	// Marshal maps info
+	var maps models.Maps
+	_ = json.Unmarshal([]byte(req.Maps), &maps)
+	locName := maps.Results[0].Locations[0].Street + ", " + maps.Results[0].Locations[0].AdminArea5 + ", " + maps.Results[0].Locations[0].AdminArea3
+	payload, _ := jsoniter.ConfigCompatibleWithStandardLibrary.Marshal(maps)
+
+	attendance := models.Presence{
+		UserID:       req.ID,
+		Checkin:      time.Now(),
+		CreatedAt:    time.Now(),
+		PhotoID:      photo.ID,
+		LocationName: locName,
+		Location:     string(payload),
+	}
+
+	err := s.AttendanceRepository.Save(attendance)
 	if err != nil {
 		return err
 	}
@@ -32,20 +56,51 @@ func (s *AttendanceService) Update(req models.Checkin) error {
 	return nil
 }
 
-func (s *AttendanceService) PhotoCompare(req models.PhotoRequest, userID string) (bool, error) {
-
+func (s *AttendanceService) PhotoCompare(req models.Checkin) (bool, error, *models.Photo) {
+	url := req.ImageUrl
 	// Get Image by user ID
-	image, err := s.AttendanceRepository.GetImageByUserID(userID)
+	image, err := s.AttendanceRepository.GetImageByUserID(req.ID)
 	if err != nil {
-		return false, err
+		return false, err, nil
 	}
+
+	filename := path.Base(url)
+	fmt.Println("Downloading ", url, " to ", filename)
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return false, err, nil
+	}
+	defer resp.Body.Close()
+
+	name := "assets/avatar/" + filename + ".jpg"
+	f, err := os.Create(name)
+	if err != nil {
+		return false, err, nil
+	}
+	defer f.Close()
+
+	_, err = io.Copy(f, resp.Body)
+
+	fmt.Println("FILE 1 : ", name)
+	fmt.Println("FILE 2 : ", image.Path)
 	httpClient := httpclient.NewHTTPClient()
-	resp, err := httpClient.CheckPhotoScore(req.Name, image.Path)
+	compareResp, err := httpClient.CheckPhotoScore(name, image.Path)
 	if err != nil {
-		return false, err
+		return false, err, nil
 	}
-	if resp.Confidence < 50 {
-		return false, err
+	if compareResp.Confidence < 50 {
+		return false, err, nil
 	}
-	return true, nil
+	//Set to DB photo
+	photo := models.Photo{
+		UserID:    req.ID,
+		Path:      name,
+		CreatedAt: time.Now(),
+	}
+	svPhoto, err := s.AttendanceRepository.SavePhoto(photo)
+	if err != nil {
+		return false, errors.New("failed save to DB"), nil
+	}
+	return true, nil, &svPhoto
 }

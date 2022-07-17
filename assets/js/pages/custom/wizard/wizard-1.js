@@ -145,10 +145,13 @@ var KTWizard1 = function () {
 
 						swal.fire({
 							"title": "",
-							"text": "The application has been successfully submitted!",
+							"text": "Attendance has been successfully submitted!",
 							"type": "success",
 							"confirmButtonClass": "btn btn-secondary"
 						});
+						setTimeout(function () {
+							location.replace("/check/home")
+						}, 3000)
 					}
 				});
 			}

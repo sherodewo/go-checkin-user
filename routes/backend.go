@@ -182,7 +182,6 @@ func BackendRoute(e *echo.Echo, db *gorm.DB) {
 	attendanceGroup := backendGroup.Group("/attend")
 	attendanceGroup.GET("/photo", attendanceController.PhotoIndex)
 	attendanceGroup.GET("/checkin", attendanceController.CheckIndex)
-	attendanceGroup.POST("/check-photo", attendanceController.PhotoCheck)
 	attendanceGroup.POST("/checkin", attendanceController.Checkin)
 	attendanceGroup.POST("/wew", attendanceController.Checkin)
 

@@ -1,13 +1,20 @@
 package models
 
+import (
+	"github.com/google/uuid"
+	"gorm.io/gorm"
+	"time"
+)
+
 type PhotoRequest struct {
 	Name string `json:"name"`
 }
 
 type Checkin struct {
-	Maps      string `json:"maps"`
-	ProjectID string `json:"project_id"`
-	Name      string `json:"name"`
+	ID        string `json:"id" form:"id"`
+	Maps      string `json:"maps" form:"maps" validate:"required"`
+	ProjectID string `json:"project_id" form:"project_id" validate:"required"`
+	ImageUrl  string `json:"image_url" form:"image_url" validate:"required"`
 }
 
 type FaceCompare struct {
@@ -93,4 +100,26 @@ type Maps struct {
 			} `json:"displayLatLng"`
 		} `json:"locations"`
 	} `json:"results"`
+}
+
+type Presence struct {
+	ID           string    `gorm:"column:id;primary_key:true"`
+	UserID       string    `gorm:"column:user_id"`
+	Checkin      time.Time `gorm:"column:checkin"`
+	Checkout     time.Time `gorm:"column:checkout"`
+	CreatedAt    time.Time `gorm:"column:created_at"`
+	PhotoID      string    `gorm:"column:photo_id"`
+	LocationName string    `gorm:"column:location_name"`
+	Location     string    `gorm:"column:location"`
+}
+
+func (c *Presence) TableName() string {
+	return "presence"
+}
+
+// BeforeCreate - Lifecycle callback - Generate UUID before persisting
+func (c *Presence) BeforeCreate(tx *gorm.DB) (err error) {
+	c.ID = uuid.New().String()
+
+	return
 }

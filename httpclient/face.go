@@ -29,10 +29,13 @@ func NewHTTPClient() *HTTPClient {
 func (hc *HTTPClient) CheckPhotoScore(image1 string, image2 string) (models.FaceCompare, error) {
 	res, err := hc.client.R().
 		SetFormData(map[string]string{
-			"api_key":        "9vAJhzMUqMwvy-t2IuPsnMbqW_989vEJ",
-			"api_secret":     "dnLxTqE54o3-cg1KeYZRaVkvmLkM7Ho7",
-			"image_base64_1": image1,
-			"image_base64_2": image2}).
+			"api_key":    "9vAJhzMUqMwvy-t2IuPsnMbqW_989vEJ",
+			"api_secret": "dnLxTqE54o3-cg1KeYZRaVkvmLkM7Ho7",
+		}).
+		SetFiles(map[string]string{
+			"image_file1": image1,
+			"image_file2": image2,
+		}).
 		Post("https://api-us.faceplusplus.com/facepp/v3/compare")
 	if err != nil {
 		log.Error(err)
