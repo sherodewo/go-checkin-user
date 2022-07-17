@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/labstack/echo/v4"
 	"go-checkin/models"
 	"go-checkin/service"
@@ -73,4 +74,43 @@ func (c *AttendanceController) Checkin(ctx echo.Context) error {
 	}
 
 	return ctx.JSON(http.StatusOK, "BERHASIL")
+}
+
+func (c *AttendanceController) Datatable(ctx echo.Context) error {
+
+	data, err, total := c.service.QueryDatatable()
+	if err != nil {
+		return ctx.JSON(http.StatusInternalServerError, err.Error())
+	}
+	var (
+		info  string
+		image string
+		time  string
+	)
+
+	listOfData := make([]map[string]interface{}, len(data))
+	for k, v := range data {
+		image = `<span class="kt-media kt-media--circle kt-media--sm">
+                        <img src="/check/` + v.ImagePath + `" alt="image">
+                    </span>`
+		time = `<small>` + v.Day + ` <br> ` + v.Hours + `</small>`
+		if v.Hours == "" {
+			time = `<small>` + v.Day + ` <br> <a href="/check/attend/checkout">Click here to check out</small></a>`
+		}
+		info = `<small>` + v.IN + `<br>` + v.Out + `</small>`
+
+		listOfData[k] = map[string]interface{}{
+			"image": image,
+			"time":  time,
+			"info":  info,
+		}
+	}
+	result := models.ResponseDatatable{
+		Draw:            10,
+		RecordsTotal:    total,
+		RecordsFiltered: total,
+		Data:            listOfData,
+	}
+	fmt.Println(result)
+	return ctx.JSON(http.StatusOK, &result)
 }

@@ -123,3 +123,12 @@ func (c *Presence) BeforeCreate(tx *gorm.DB) (err error) {
 
 	return
 }
+
+type AttendDatatable struct {
+	ID        string `json:"id"`
+	ImagePath string `json:"image_path"`
+	Day       string `json:"day"`
+	Hours     string `json:"hours"`
+	IN        string `json:"in"`
+	Out       string `json:"out"`
+}

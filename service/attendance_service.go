@@ -104,3 +104,43 @@ func (s *AttendanceService) PhotoCompare(req models.Checkin) (bool, error, *mode
 	}
 	return true, nil, &svPhoto
 }
+
+func (s *AttendanceService) QueryDatatable() ([]models.AttendDatatable, error, int64) {
+	var resp []models.AttendDatatable
+	var val string
+	var Out string
+	data, err, total := s.AttendanceRepository.QueryDatatable()
+	if err != nil {
+		return nil, err, total
+	}
+
+	for _, v := range data {
+		//Get Image Path
+		photo, _ := s.AttendanceRepository.GetPhotoID(v.PhotoID)
+
+		timeIn := v.Checkin
+		timeOut := v.Checkout
+
+		Day := timeIn.Format("Monday ,02 January")
+		In := timeIn.Format(" 15:04 ")
+		total := timeOut.Sub(timeIn)
+
+		if timeOut.After(timeIn) {
+			val = fmt.Sprintf("Worked for %d Hrs %d Min", int64(total.Hours()), int64(total.Minutes())-(int64(total.Hours())*60))
+			Out = timeOut.Format(" 15:04 ")
+		} else {
+			Out = "WORKING"
+		}
+		check := models.AttendDatatable{
+			ID:        v.ID,
+			ImagePath: photo.Path,
+			Day:       Day,
+			Hours:     val,
+			IN:        In,
+			Out:       Out,
+		}
+		resp = append(resp, check)
+	}
+
+	return resp, nil, total
+}

@@ -10,6 +10,8 @@ type AttendanceRepository interface {
 	SavePhoto(photo models.Photo) (models.Photo, error)
 	Update(models.Checkin) error
 	GetImageByUserID(userID string) (models.Photo, error)
+	GetPhotoID(photoID string) (models.Photo, error)
+	QueryDatatable() ([]models.Presence, error, int64)
 }
 
 type attendanceRepository struct {
@@ -38,7 +40,16 @@ func (r *attendanceRepository) Update(checkin models.Checkin) error {
 
 func (r *attendanceRepository) GetImageByUserID(userID string) (models.Photo, error) {
 	var entity models.Photo
-	err := r.DB.Model(models.Photo{ID: userID}).Find(&entity).Error
+	err := r.DB.Where("user_id = ?", userID).Model(models.Photo{}).Find(&entity).Error
+	if err != nil {
+		return entity, err
+	}
+	return entity, nil
+}
+
+func (r *attendanceRepository) GetPhotoID(photoID string) (models.Photo, error) {
+	var entity models.Photo
+	err := r.DB.Where("id = ?", photoID).Model(models.Photo{}).Find(&entity).Error
 	if err != nil {
 		return entity, err
 	}
@@ -51,4 +62,21 @@ func (r *attendanceRepository) SavePhoto(entity models.Photo) (models.Photo, err
 		return entity, err
 	}
 	return entity, nil
+}
+
+func (r *attendanceRepository) QueryDatatable() ([]models.Presence, error, int64) {
+	var entity []models.Presence
+	err := r.DB.
+		Model(models.Presence{}).
+		Limit(10).
+		Order("created_at desc").
+		Find(&entity).Error
+	if err != nil {
+		return entity, err, 0
+	}
+	newErr := r.DB.
+		Model(models.Presence{}).
+		Order("created_at desc").
+		Find(&entity)
+	return entity, nil, newErr.RowsAffected
 }
