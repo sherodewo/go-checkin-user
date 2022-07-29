@@ -49,6 +49,79 @@ ATTANDANCE{{define "content"}}
 </div>
 
 <script type="text/javascript">
+
+    function alert(id) {
+        swal.fire({
+            title: 'Are you sure want to checkout? ',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Checkout!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then(function(result){
+            if (result){
+                console.log("RES : ", result)
+
+                $.ajax({
+                    url: "/check/attend/checkout/"+id,
+                    type: "POST",
+                    beforeSend: function () {
+                    },
+                    success: function (res) {
+                        swal.fire(
+                            'Checkout!',
+                            ''+res+'',
+                            'success'
+                        )
+                    },
+                    error: function (xhr) {
+                        swal.fire(
+                            'Error',
+                            ''+xhr+'',
+                            'error'
+                        )
+                    }
+                })
+            }else {
+                swal.fire(
+                    'Cancelled',
+                    'Your file is safe :)',
+                    'error'
+                )
+            }
+        });
+    }
+    $('#kt_sweetalert_demo_9').click(function(e) {
+        alert("WEW")
+        swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then(function(result){
+            if (result.value) {
+                swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+
+                // result.dismiss can be 'cancel', 'overlay',
+                // 'close', and 'timer'
+            } else if (result.dismiss === 'cancel') {
+                swal.fire(
+                    'Cancelled',
+                    'Your imaginary file is safe :)',
+                    'error'
+                )
+            }
+        });
+    });
+
     function setCookie(name, value, days) {
         var expires = "";
         if (days) {

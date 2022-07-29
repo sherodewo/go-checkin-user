@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"github.com/labstack/echo/v4"
 	"go-checkin/models"
 	"go-checkin/service"
@@ -63,7 +62,7 @@ func (c *AttendanceController) Checkin(ctx echo.Context) error {
 	// Face Compare
 	isMatch, err, photo := c.service.PhotoCompare(req)
 	if err != nil || !isMatch {
-		return ctx.JSON(400, echo.Map{"message": "Not Matched", "errors": err})
+		return ctx.JSON(400, echo.Map{"message": "Photo Not Matched", "errors": err})
 	}
 
 	// Save attendance
@@ -95,7 +94,7 @@ func (c *AttendanceController) Datatable(ctx echo.Context) error {
                     </span>`
 		time = `<small>` + v.Day + ` <br> ` + v.Hours + `</small>`
 		if v.Hours == "" {
-			time = `<small>` + v.Day + ` <br> <a href="/check/attend/checkout">Click here to check out</small></a>`
+			time = `<small>` + v.Day + ` <br> <a type="button" style="color:blue;"  onclick="alert('` + v.ID + `')">Click here to check out</small></a>`
 		}
 		info = `<small>` + v.IN + `<br>` + v.Out + `</small>`
 
@@ -111,6 +110,16 @@ func (c *AttendanceController) Datatable(ctx echo.Context) error {
 		RecordsFiltered: total,
 		Data:            listOfData,
 	}
-	fmt.Println(result)
 	return ctx.JSON(http.StatusOK, &result)
+}
+
+func (c *AttendanceController) CheckOut(ctx echo.Context) error {
+	id := ctx.Param("id")
+
+	err := c.service.Checkout(id)
+	if err != nil {
+		return ctx.JSON(400, echo.Map{"message": "Service Unavailable", "errors": err})
+	}
+
+	return ctx.JSON(http.StatusOK, "Success Checkout")
 }

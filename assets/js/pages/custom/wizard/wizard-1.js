@@ -152,6 +152,19 @@ var KTWizard1 = function () {
 						setTimeout(function () {
 							location.replace("/check/home")
 						}, 3000)
+					},
+					error:function (xhr){
+						swal.fire({
+							"title": xhr.responseJSON.message,
+							"text": "The application unsuccessfull !",
+							"type": "error",
+							"confirmButtonClass": "btn btn-secondary",
+							width: '800px'
+
+						});
+						setTimeout(function () {
+							location.reload()
+						}, 2000)
 					}
 				});
 			}

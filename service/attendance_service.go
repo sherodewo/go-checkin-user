@@ -55,6 +55,13 @@ func (s *AttendanceService) Update(req models.Checkin) error {
 	}
 	return nil
 }
+func (s *AttendanceService) Checkout(id string) error {
+	err := s.AttendanceRepository.Checkout(id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
 
 func (s *AttendanceService) PhotoCompare(req models.Checkin) (bool, error, *models.Photo) {
 	url := req.ImageUrl
@@ -129,6 +136,7 @@ func (s *AttendanceService) QueryDatatable() ([]models.AttendDatatable, error, i
 			val = fmt.Sprintf("Worked for %d Hrs %d Min", int64(total.Hours()), int64(total.Minutes())-(int64(total.Hours())*60))
 			Out = timeOut.Format(" 15:04 ")
 		} else {
+			val = ""
 			Out = "WORKING"
 		}
 		check := models.AttendDatatable{

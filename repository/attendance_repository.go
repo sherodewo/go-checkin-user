@@ -3,12 +3,14 @@ package repository
 import (
 	"go-checkin/models"
 	"gorm.io/gorm"
+	"time"
 )
 
 type AttendanceRepository interface {
 	Save(presence models.Presence) error
 	SavePhoto(photo models.Photo) (models.Photo, error)
 	Update(models.Checkin) error
+	Checkout(id string) error
 	GetImageByUserID(userID string) (models.Photo, error)
 	GetPhotoID(photoID string) (models.Photo, error)
 	QueryDatatable() ([]models.Presence, error, int64)
@@ -36,6 +38,11 @@ func (r *attendanceRepository) Update(checkin models.Checkin) error {
 		return err
 	}
 	return nil
+}
+
+func (r *attendanceRepository) Checkout(id string) error {
+	err := r.DB.Model(models.Presence{ID: id}).UpdateColumns(&models.Presence{Checkout: time.Now()}).Error
+	return err
 }
 
 func (r *attendanceRepository) GetImageByUserID(userID string) (models.Photo, error) {
