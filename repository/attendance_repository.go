@@ -75,7 +75,7 @@ func (r *attendanceRepository) QueryDatatable(id string) ([]models.Presence, err
 	var entity []models.Presence
 	err := r.DB.
 		Model(models.Presence{}).
-		Where("id = ?", id).
+		Where("user_id = ?", id).
 		Limit(10).
 		Order("created_at desc").
 		Find(&entity).Error
@@ -84,7 +84,7 @@ func (r *attendanceRepository) QueryDatatable(id string) ([]models.Presence, err
 	}
 	newErr := r.DB.
 		Model(models.Presence{}).
-		Where("id = ?", id).
+		Where("user_id = ?", id).
 		Order("created_at desc").
 		Find(&entity)
 	return entity, nil, newErr.RowsAffected
