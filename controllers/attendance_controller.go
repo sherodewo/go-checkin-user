@@ -76,8 +76,8 @@ func (c *AttendanceController) Checkin(ctx echo.Context) error {
 }
 
 func (c *AttendanceController) Datatable(ctx echo.Context) error {
-
-	data, err, total := c.service.QueryDatatable()
+	id := ctx.Param("id")
+	data, err, total := c.service.QueryDatatable(id)
 	if err != nil {
 		return ctx.JSON(http.StatusInternalServerError, err.Error())
 	}

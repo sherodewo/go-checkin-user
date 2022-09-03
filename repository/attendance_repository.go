@@ -13,7 +13,7 @@ type AttendanceRepository interface {
 	Checkout(id string) error
 	GetImageByUserID(userID string) (models.Photo, error)
 	GetPhotoID(photoID string) (models.Photo, error)
-	QueryDatatable() ([]models.Presence, error, int64)
+	QueryDatatable(id string) ([]models.Presence, error, int64)
 }
 
 type attendanceRepository struct {
@@ -71,10 +71,11 @@ func (r *attendanceRepository) SavePhoto(entity models.Photo) (models.Photo, err
 	return entity, nil
 }
 
-func (r *attendanceRepository) QueryDatatable() ([]models.Presence, error, int64) {
+func (r *attendanceRepository) QueryDatatable(id string) ([]models.Presence, error, int64) {
 	var entity []models.Presence
 	err := r.DB.
 		Model(models.Presence{}).
+		Where("id = ?", id).
 		Limit(10).
 		Order("created_at desc").
 		Find(&entity).Error
@@ -83,6 +84,7 @@ func (r *attendanceRepository) QueryDatatable() ([]models.Presence, error, int64
 	}
 	newErr := r.DB.
 		Model(models.Presence{}).
+		Where("id = ?", id).
 		Order("created_at desc").
 		Find(&entity)
 	return entity, nil, newErr.RowsAffected

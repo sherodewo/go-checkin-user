@@ -112,11 +112,11 @@ func (s *AttendanceService) PhotoCompare(req models.Checkin) (bool, error, *mode
 	return true, nil, &svPhoto
 }
 
-func (s *AttendanceService) QueryDatatable() ([]models.AttendDatatable, error, int64) {
+func (s *AttendanceService) QueryDatatable(id string) ([]models.AttendDatatable, error, int64) {
 	var resp []models.AttendDatatable
 	var val string
 	var Out string
-	data, err, total := s.AttendanceRepository.QueryDatatable()
+	data, err, total := s.AttendanceRepository.QueryDatatable(id)
 	if err != nil {
 		return nil, err, total
 	}

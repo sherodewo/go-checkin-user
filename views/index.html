@@ -15,23 +15,11 @@ ATTANDANCE{{define "content"}}
     <div class="card-header">
         Welcome, {{.data.Name}}
     </div>
+    <input id="id-user" type="text" value="{{.data.UserID}}" hidden>
     <div class="card-body">
         <table class="table table-striped- cell-border table-hover table-checkable" id="table-user"
                style="width: 100%">
             <thead>
-<!--            <tr>-->
-<!--                <td style="width: 20%">-->
-<!--                    <span class="kt-media kt-media&#45;&#45;circle kt-media&#45;&#45;sm">-->
-<!--                        <img src="/check/assets/media/users/100_12.jpg" alt="image">-->
-<!--                    </span>-->
-<!--                </td>-->
-<!--                <td style="width: 40%"><small>Friday, 24 June <br> Worked for 15 Hrs 32 Min</small></td>-->
-<!--                <td style="width: 40%">-->
-<!--                    <div class="text-right">-->
-<!--                        <small>08.00<br>16.00</small>-->
-<!--                    </div>-->
-<!--                </td>-->
-<!--            </tr>-->
             </thead>
             <tbody>
             </tbody>
@@ -45,7 +33,6 @@ ATTANDANCE{{define "content"}}
             <h6>ADD ATTENDANCE</h6>
         </div>
     </div>
-
 </div>
 
 <script type="text/javascript">
